@@ -126,6 +126,7 @@ activeAFRF = false;
 activeUSAF = false;
 activeGREF = false;
 hayFFAA = false;
+haySFP = false;
 
 if ("LIB_PTRD" in arifles) then
 	{
@@ -139,6 +140,7 @@ else
 	if ("ffaa_armas_hkg36k_normal" in arifles) then {hayFFAA = true};
 	if ("rhs_weap_m4a1_d" in arifles) then {activeUSAF = true; hayRHS = true};
 	if ("rhs_weap_m92" in arifles) then {activeGREF = true; hayRHS = true} else {mguns pushBack "LMG_Mk200_BI_F"};
+	if ("sfp_ak5" in arifles) then {haySFP = true};
 	hayIFA = false;
 	cascos = cascos select {getNumber (configfile >> "CfgWeapons" >> _x >> "ItemInfo" >> "HitpointsProtectionInfo" >> "Head" >> "armor") > 2};
 	humo = ["SmokeShell","SmokeShellRed","SmokeShellGreen","SmokeShellBlue","SmokeShellYellow","SmokeShellPurple","SmokeShellOrange"];
@@ -238,6 +240,11 @@ if (!hayIFA) then
 	else
 		{
 		if (buenos == independent) then {call compile preProcessFileLineNumbers "Templates\buenosRHSGREF.sqf"} else {call compile preProcessFileLineNumbers "Templates\malosRHSGREF.sqf"};
+		};
+
+	if (haySFP) then
+		{
+		call compile preProcessFileLineNumbers "Templates\buenosSFP.sqf"
 		};
 	}
 else
@@ -532,6 +539,16 @@ else
     initialRifles = ["rhs_weap_akms","rhs_weap_m38_rail","rhs_weap_kar98k","rhs_weap_savz61"];
     unlockedItems = unlockedItems + ["rhs_acc_2dpZenit"];
     unlockedAT = ["rhs_weap_rpg7"];
+    };
+
+if (haySFP) then
+    {
+    unlockedWeapons = ["sfp_ak4b","sfp_ak5c","sfp_ak5c_m203","sfp_ksp58B2","sfp_ksp90b","sfp_psg90","sfp_p88","Binocular","launch_MRAWS_olive_rail_F"];
+    unlockedRifles = ["sfp_ak4","sfp_ak5c"];//standard rifles for AI riflemen, medics engineers etc. are picked from this array. Add only rifles.
+    unlockedMagazines = ["sfp_20Rnd_762x51_ak4","sfp_30Rnd_556x45_Stanag","sfp_30Rnd_556x45_Stanag_plastic","sfp_50Rnd_762x51_ksp58","sfp_200Rnd_556x45_ksp90","sfp_9Rnd_762x51_psg90","sfp_17Rnd_9x19_Mag","MRAWS_HEAT_F","1Rnd_HE_Grenade_shell","sfp_handgrenade_shgr56","SmokeShell","sfp_sprdeg46_mag"];
+    initialRifles = ["sfp_ak4","sfp_ak5c","sfp_ksp58B2","sfp_ksp90b"];
+    unlockedItems = unlockedItems + ["sfp_optic_aimpoint","sfp_optic_3x_aimpoint","sfp_m90w_cap","sfp_m90w_cap_peltor","sfp_m90w_helmet","sfp_m90w_helmet_peltor","sfp_m90w_helmet_headset","sfp_backpack_stridssack2000"];
+    unlockedAT = ["launch_MRAWS_olive_rail_F"];
     };
 
 {

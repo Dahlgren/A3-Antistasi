@@ -571,8 +571,12 @@ if (hayFFAA) then
 	{
 	_texto = _texto + ["FFAA Detected\n\nAntistasi detects FFAA in the server config.\nFIA Faction will be replaced by Spanish Armed Forces"];
 	};
+if (haySFP) then
+	{
+	_texto = _texto + ["SFP Detected\n\nAntistasi detects SFP in the server config.\nFIA Faction will be replaced by Swedish Armed Forces"];
+	};
 
-if (hayTFAR or hayACE or hayRHS or hayACRE or hayFFAA) then
+if (hayTFAR or hayACE or hayRHS or hayACRE or hayFFAA or haySFP) then
 	{
 	[_texto] spawn
 		{
